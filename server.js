@@ -246,10 +246,22 @@ const initAdmin = async () => {
   }
 };
 initAdmin();
+// Add this near the bottom, before module.exports
+app.get('/', (req, res) => {
+    res.json({ 
+        message: 'Berry Berry API is running! 🚀',
+        endpoints: {
+            products: 'GET /api/products',
+            customers: 'GET /api/customers',
+            sales: 'POST /api/sales',
+            login: 'POST /api/auth/login',
+            register: 'POST /api/auth/register'
+        }
+    });
+});
 
-// ---------- For Vercel (Serverless) ----------
+// ===== For Vercel (Serverless) =====
 module.exports = app;
-
 // ---------- For Local Testing ----------
 if (require.main === module) {
   const PORT = process.env.PORT || 5000;
